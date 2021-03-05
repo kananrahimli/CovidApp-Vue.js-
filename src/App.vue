@@ -1,16 +1,16 @@
 <template>
-  <div class="container ">
-      <h2>Corona Statistic</h2>
-      <select class="custom-select" v-model="selectedCountry"  @change="getDataByCountry">
-        <option selected disabled value="">Global</option>
+  <div class="container d-flex flex-row flex-column align-items-center">
+      <h2 class="mb-5">Corona Statistic</h2>
+      <select class="custom-select" v-model="selectedCountry" ref="select"  @change="getDataByCountry">
+        <option selected  value="" >Global</option>
         <option v-for="country in countries" :value="country.Slug" :key="country.Slug">{{country.Country}}</option>
       </select>
-      <div class="d-flex justify-content-center mt-5">
-        <div class="boxC box mx-auto bg-primary w-25 pt-4 ">Confirmed <br>{{totalConfirmed }}</div>
-        <div class="boxD box mx-auto bg-danger w-25 pt-4">Deaths <br>{{totalDeaths}}</div>
-        <div class="boxR box mx-auto bg-success w-25 pt-4 ">Recovered <br>{{totalRecovered}}</div>
+      <div class=" row mt-5 container ">
+        <div class="boxC box  bg-primary mt-2 mx-auto pt-4 col-md-3 ">Confirmed <br>{{totalConfirmed }}</div>
+        <div class="boxD box  bg-danger mt-2 mx-auto pt-4 col-md-3">Deaths <br>{{totalDeaths}}</div>
+        <div class="boxR box  bg-success mt-2 mx-auto pt-4 col-md-3 ">Recovered <br>{{totalRecovered}}</div>
       </div>
-      <table class="table table-bordered table-dark mt-5">
+      <table class="table table-bordered table-responsive-md table-dark mt-5 ">
         <thead>
           <tr>
             <th >#</th>
@@ -76,8 +76,8 @@ export default {
           this.totalConfirmed=data[0].TotalConfirmed
           this.totalDeaths=data[0].TotalDeaths
           this.totalRecovered=data[0].TotalRecovered
-      
-      console.log(data)
+
+     
     }
   },
   mounted(){
@@ -95,11 +95,17 @@ export default {
   text-align: center;
   /* color: #2c3e50; */
   margin-top: 60px;
-  background-color: khaki;
+  
 }
 .box{
   height: 100px  !important;
   color: aliceblue;
   font-weight: bold;
+}
+
+h2{
+  color: rgb(78, 99, 99);
+  font-weight: bolder;
+
 }
 </style>
