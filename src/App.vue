@@ -1,5 +1,6 @@
 <template>
   <div class="container ">
+      <h2>Corona Statistic</h2>
       <select class="custom-select" v-model="selectedCountry"  @change="getDataByCountry">
         <option selected disabled value="">Global</option>
         <option v-for="country in countries" :value="country.Slug" :key="country.Slug">{{country.Country}}</option>
@@ -58,8 +59,8 @@ export default {
           this.countries=res.data
         })
     },
-    getGlobalData(){
-      axios.get('https://api.covid19api.com/summary')
+    async getGlobalData(){
+     await axios.get('https://api.covid19api.com/summary')
         .then(response=>{
           const data=response.data;
           this.totalConfirmed=response.data.Global.TotalConfirmed
