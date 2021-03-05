@@ -10,6 +10,13 @@
         <div class="boxD box  bg-danger mt-2 mx-auto pt-4 col-md-3">Deaths <br>{{totalDeaths}}</div>
         <div class="boxR box  bg-success mt-2 mx-auto pt-4 col-md-3 ">Recovered <br>{{totalRecovered}}</div>
       </div>
+      
+      <div class="row mt-3 container">
+        <div class="boxC box  bg-primary mt-2 mx-auto pt-4 col-md-3 ">New Confirmed <br>{{NewConfirmed }}</div>
+        <div class="boxD box  bg-danger mt-2 mx-auto pt-4 col-md-3"> New Deaths <br>{{NewDeaths}}</div>
+        <div class="boxR box  bg-success mt-2 mx-auto pt-4 col-md-3 ">New Recovered <br>{{NewRecovered}}</div>
+      </div>
+        
       <table class="table table-bordered table-responsive-md table-dark mt-5 ">
         <thead>
           <tr>
@@ -18,6 +25,9 @@
             <th >Confirmed</th>
             <th >Deaths</th>
             <th >Recovered</th>
+            <th >New Confirmed</th>
+            <th >New Deaths</th>
+            <th >New Recovered</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +37,9 @@
             <td>{{country.TotalConfirmed}}</td>
             <td>{{country.TotalDeaths}}</td>
             <td>{{country.TotalRecovered}}</td>
+            <td>{{country.NewConfirmed}}</td>
+            <td>{{country.NewDeaths}}</td>
+            <td>{{country.NewRecovered}}</td>
           </tr>
         </tbody>
       </table>
@@ -43,6 +56,9 @@ export default {
       totalConfirmed:0,
       totalDeaths:0,
       totalRecovered:0,
+      NewConfirmed:0,
+      NewDeaths:0,
+      NewRecovered:0,
       allCountries:{},
       selectedCountry:""
     }
@@ -66,6 +82,11 @@ export default {
           this.totalConfirmed=response.data.Global.TotalConfirmed
           this.totalDeaths=response.data.Global.TotalDeaths
           this.totalRecovered=response.data.Global.TotalRecovered
+          
+          this.NewConfirmed=response.data.Global.NewConfirmed
+          this.NewDeaths=response.data.Global.NewDeaths
+          this.NewRecovered=response.data.Global.NewRecovered
+          
           this.allCountries=response.data.Countries
         })
     },
@@ -76,6 +97,10 @@ export default {
           this.totalConfirmed=data[0].TotalConfirmed
           this.totalDeaths=data[0].TotalDeaths
           this.totalRecovered=data[0].TotalRecovered
+
+          this.NewConfirmed=data[0].NewConfirmed
+          this.NewDeaths=data[0].NewDeaths
+          this.NewRecovered=data[0].NewRecovered
 
      
     }
