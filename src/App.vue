@@ -133,4 +133,13 @@ h2{
   font-weight: bolder;
 
 }
+.bg-primary{
+  background-color: aqua  !important;
+}
+.bg-danger{
+  background-color: #ff4d4d !important;
+}
+.bg-success{
+  background-color: #32ff7e  !important;
+}
 </style>
