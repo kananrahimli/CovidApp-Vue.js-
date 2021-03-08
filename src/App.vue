@@ -4,50 +4,73 @@
 
     <div class="d-flex flex-wrap justify-content-around">
       <select
-      class="custom-select col-md-7 mb-4 "
-      v-model="selectedCountry"
-      ref="select"
-      @change="getDataByCountry"
-    >
-      <option selected value="">Global</option>
-      <option
-        v-for="country in countries"
-        :value="country.Slug"
-        :key="country.Slug"
-        >{{ country.Country }} </option
+        class="custom-select col-md-7 mb-4 "
+        v-model="selectedCountry"
+        ref="select"
+        @change="getDataByCountry"
       >
-    </select>
-    <input
-      type="text"
-      placeholder="Search"
-      class="form-control col-md-4  "
-      @keyup.enter="search()"
-      v-model="searchedCountry"
-    />
+        <option selected value="">Global</option>
+        <option
+          v-for="country in countries"
+          :value="country.Slug"
+          :key="country.Slug"
+          >{{ country.Country }}
+        </option>
+      </select>
+      <input
+        type="text"
+        placeholder="Search"
+        class="form-control col-md-4  "
+        @keyup.enter="search()"
+        v-model="searchedCountry"
+      />
     </div>
-    
 
     <div class=" row mt-5 container ">
       <div class="boxC box  bg-primary mt-2 mx-auto pt-4 col-md-3 ">
-        Confirmed <br />{{ !searchedCountry || selectedCountry? totalConfirmed:filterCountry.TotalConfirmed}} 
+        Confirmed <br />{{
+          !searchedCountry || selectedCountry
+            ? totalConfirmed
+            : filterCountry.TotalConfirmed
+        }}
       </div>
       <div class="boxD box  bg-danger mt-2 mx-auto pt-4 col-md-3">
-        Deaths <br />{{ !searchedCountry || selectedCountry? totalDeaths:filterCountry.TotalDeaths }}
+        Deaths <br />{{
+          !searchedCountry || selectedCountry
+            ? totalDeaths
+            : filterCountry.TotalDeaths
+        }}
       </div>
       <div class="boxR box  bg-success mt-2 mx-auto pt-4 col-md-3 ">
-        Recovered <br />{{ !searchedCountry || selectedCountry? totalRecovered:filterCountry.TotalRecovered }}
+        Recovered <br />{{
+          !searchedCountry || selectedCountry
+            ? totalRecovered
+            : filterCountry.TotalRecovered
+        }}
       </div>
     </div>
 
     <div class="row mt-3 container">
       <div class="boxC box  bg-primary mt-2 mx-auto pt-4 col-md-3 ">
-        New Confirmed <br />{{  !searchedCountry || selectedCountry? NewConfirmed:filterCountry.NewConfirmed }}
+        New Confirmed <br />{{
+          !searchedCountry || selectedCountry
+            ? NewConfirmed
+            : filterCountry.NewConfirmed
+        }}
       </div>
       <div class="boxD box  bg-danger mt-2 mx-auto pt-4 col-md-3">
-        New Deaths <br />{{ !searchedCountry || selectedCountry? NewDeaths:filterCountry.NewDeaths}}
+        New Deaths <br />{{
+          !searchedCountry || selectedCountry
+            ? NewDeaths
+            : filterCountry.NewDeaths
+        }}
       </div>
       <div class="boxR box  bg-success mt-2 mx-auto pt-4 col-md-3 ">
-        New Recovered <br />{{ !searchedCountry || selectedCountry? NewRecovered:filterCountry.NewRecovered }}
+        New Recovered <br />{{
+          !searchedCountry || selectedCountry
+            ? NewRecovered
+            : filterCountry.NewRecovered
+        }}
       </div>
     </div>
 
@@ -96,7 +119,7 @@ export default {
       allCountries: {},
       selectedCountry: "",
       searchedCountry: "",
-      filterCountry:''
+      filterCountry: "",
     };
   },
   computed: {},
@@ -128,16 +151,16 @@ export default {
       });
     },
     async search() {
-      await axios.get("https://api.covid19api.com/summary").then(() => {
-        this.filterCountry = this.allCountries.find((country) => {
-          return country.Country.includes(this.searchedCountry.charAt(0).toUpperCase() + this.searchedCountry.slice(1));
-        })
+      this.filterCountry = this.allCountries.find((country) => {
+        return country.Country.includes(
+          this.searchedCountry.charAt(0).toUpperCase() +
+            this.searchedCountry.slice(1)
+        );
 
         console.log(this.filterCountry);
-      })
-       this.selectedCountry=""
-      //  this.searchedCountry=''
-      console.log(this.filterCountry)
+      });
+      this.selectedCountry = "";
+      console.log(this.filterCountry);
     },
 
     getDataByCountry() {
@@ -151,6 +174,7 @@ export default {
       this.NewConfirmed = data[0].NewConfirmed;
       this.NewDeaths = data[0].NewDeaths;
       this.NewRecovered = data[0].NewRecovered;
+      this.searchedCountry = "";
     },
   },
   mounted() {
@@ -180,7 +204,7 @@ h2 {
   font-weight: bolder;
 }
 .bg-primary {
-  background-color: #0652DD !important;
+  background-color: #0652dd !important;
 }
 .bg-danger {
   background-color: #c44569 !important;
@@ -188,10 +212,10 @@ h2 {
 .bg-success {
   background-color: #218c74 !important;
 }
-.box{
+.box {
   border-radius: 10px;
 }
-.table-dark{
-  background-color: #706fd3  !important;
+.table-dark {
+  background-color: #706fd3 !important;
 }
 </style>
